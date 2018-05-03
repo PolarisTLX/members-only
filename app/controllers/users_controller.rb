@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   def new
     @user = User.new
   end
@@ -12,6 +13,7 @@ class UsersController < ApplicationController
 
     if @user.save
       log_in @user
+      remember @user
       flash[:success] = "Welcome to the Gossip App!"
       redirect_to @user
     else
