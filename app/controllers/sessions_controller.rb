@@ -12,6 +12,9 @@ class SessionsController < ApplicationController
         # If username exists and password matches, log in
         log_in user   # long_in is a helper method that we created in sessions_helper.rb.  sessions_helper.rb we said to be included in applications_controller
 
+        # if the user checks off the "remember me box? 1 : else 0"
+        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+
         redirect_to user # Rails automatically converts this to the route for the user’s profile page:  user_url(user)
 
       else
