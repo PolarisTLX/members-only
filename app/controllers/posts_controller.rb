@@ -18,7 +18,8 @@ class PostsController < ApplicationController
 
     if @post.save
       flash[:success] = "Your gossip has been posted"
-      redirect_to @login_path
+      redirect_to root_url
+      # root_url will just be where all the posts are shown
     else
       render :new
     end
@@ -26,7 +27,7 @@ class PostsController < ApplicationController
 
   # to show all the posts:
   def index
-    @post = Post.all
+    @posts = Post.all
   end
 
   private
