@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+UserOne:
+  id: 1
+  username: Person1
+  password_digest: User.digest("password")
+
+UserTwo:
+  id: 2
+  username: Person2
+  password_digest: User.digest("password")
