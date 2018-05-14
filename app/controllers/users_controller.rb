@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   # this is a filter to restrict access only to logged in users:
   # NOTE that we apply ONLY so that this check/filter only occurs on the edit and :edit and :update actions
   before_action :logged_in_user, only: [:edit, :update]
@@ -21,7 +20,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       remember @user
-      flash[:success] = "Welcome to the Gossip App!"
+      flash[:success] = 'Welcome to the Gossip App!'
       redirect_to @user
     else
       render :new
@@ -36,7 +35,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       # Handle a successful update
-      flash[:success] = "Profile updated"
+      flash[:success] = 'Profile updated'
       redirect_to @user
     else
       render 'edit'
@@ -52,7 +51,7 @@ class UsersController < ApplicationController
   # This is the check to allow the authorisation of a user's access
   def logged_in_user
     unless logged_in?
-      flash[:danger] = "Please log in."
+      flash[:danger] = 'Please log in.'
       redirect_to login_url
     end
   end
@@ -63,5 +62,4 @@ class UsersController < ApplicationController
     redirect_to(current_user) unless @user == current_user
     # redirect_to(current_user) sends a user to their own profile if they tried accessing a different profile
   end
-
 end
