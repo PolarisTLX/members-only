@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'rails_helper'
 
-RSpec.feature "User signs up", :type => :feature do
+RSpec.feature "User signs up", type: :feature do
 
   scenario "User signs up sucessfully" do
     visit "/signup"
