@@ -33,6 +33,7 @@ RSpec.describe SessionsController, type: :controller do
       it "does not log in user and re-renders login view" do
         post :create, params: { session: { username: user.username, password: 'wrongpassword' } }
         expect(logged_in?).to be false
+        # BELOW DOES NOT WORK
         # expect(response).to render_template(:new)
         # expect(response).to have_content('Invalid email/password combination')
         # expect(response.body).to include('Invalid email/password combination')
