@@ -14,7 +14,9 @@ RSpec.feature "User signs up", type: :feature do
 
     # expect(response.response_code).to eql(302) # 302 is the HTTP code for a successful signup - DOES NOT WORK
     # response.should redirect_to '/users/*' - DOES NOT WORK
+    expect(page.current_path).to eq '/users/4'
     expect(page).to have_text("Welcome to the Gossip App!")
+
   end
 
   scenario "User submits invalid info" do

@@ -7,10 +7,6 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-  def show
-    @post = Post.find(params[:id])
-  end
-
   def create
     @post = current_user.posts.build(post_params)
 
@@ -23,7 +19,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # to show all the posts:
   def index
     @posts = Post.all
   end

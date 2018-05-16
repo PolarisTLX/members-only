@@ -4,10 +4,9 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(username: params[:session][:username])
 
-    if user && user.authenticate(params[:session][:password])
+    if user != nil && user.authenticate(params[:session][:password])
 
-      # If username exists and password matches, log in
-      log_in user   # log_in is a helper method that we created in sessions_helper.rb.  sessions_helper.rb we said to be included in applications_controller
+      log_in user   # in sessions_helper.rb.  sessions_helper.rb included in applications_controller
 
       # if the user checks off the "remember me box? 1 : else 0"
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)

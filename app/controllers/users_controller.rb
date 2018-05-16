@@ -48,7 +48,6 @@ class UsersController < ApplicationController
     params.require(:user).permit(:username, :password, :password_confirmation)
   end
 
-  # This is the check to allow the authorisation of a user's access
   def logged_in_user
     unless logged_in?
       flash[:danger] = 'Please log in.'
