@@ -2,6 +2,11 @@ require 'spec_helper'
 include SessionsHelper
 
 RSpec.describe 'posts/index.html.erb' do
+
+  before do
+    Rails.application.load_seed
+  end
+  
   context 'when the user is logged in' do
     it 'displays the author name' do
       log_in(User.first)

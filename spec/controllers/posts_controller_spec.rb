@@ -2,6 +2,7 @@ require 'rails_helper'
 include SessionsHelper
 
 RSpec.describe PostsController, type: :controller do
+  
   before do
     Rails.application.load_seed
   end

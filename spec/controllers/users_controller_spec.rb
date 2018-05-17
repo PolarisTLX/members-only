@@ -2,6 +2,7 @@ require 'rails_helper'
 include SessionsHelper
 
 RSpec.describe UsersController, type: :controller do
+  
   before do
     Rails.application.load_seed
   end

@@ -3,6 +3,10 @@ require 'rails_helper'
 
 RSpec.feature "User signs up", type: :feature do
 
+  before do
+    Rails.application.load_seed
+  end
+
   scenario "User signs up sucessfully" do
     visit "/signup"
 
