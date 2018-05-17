@@ -2,7 +2,6 @@ require 'spec_helper'
 include SessionsHelper
 
 RSpec.describe 'posts/index.html.erb' do
-
   context 'when the user is logged in' do
     it 'displays the author name' do
       log_in(User.first)

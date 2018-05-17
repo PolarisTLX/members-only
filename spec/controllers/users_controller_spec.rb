@@ -42,7 +42,7 @@ RSpec.describe UsersController, type: :controller do
     context 'when user saves an edit to their profile' do
       it 'properly saves the changes' do
         log_in(User.first)
-        patch edit_user_path(User.first), params: { user: { username: 'NewName', password: 'password', password_confirmation: 'password' } }
+        patch user_path(User.first), params: { user: { username: 'NewName', password: 'password', password_confirmation: 'password' } }
         expect(User.first.username).to eq('NewName')
       end
     end
