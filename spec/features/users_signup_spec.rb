@@ -12,9 +12,7 @@ RSpec.feature "User signs up", type: :feature do
 
     click_button "Submit"
 
-    # expect(response.response_code).to eql(302) # 302 is the HTTP code for a successful signup - DOES NOT WORK
-    # response.should redirect_to '/users/*' - DOES NOT WORK
-    expect(page.current_path).to eq '/users/4'
+    expect(page.current_path).to eq "/users/#{User.last.id}"
     expect(page).to have_text("Welcome to the Gossip App!")
 
   end
@@ -34,7 +32,6 @@ RSpec.feature "User signs up", type: :feature do
   scenario "User submits incorrect password confirmation" do
     visit "/users/new"
 
-    # No form fields filled in
     fill_in "Username", :with => "AnyName"
     fill_in "Password", :with => "password"
     fill_in "Password confirmation", :with => "wrongmatch"
