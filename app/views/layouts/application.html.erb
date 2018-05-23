@@ -10,6 +10,23 @@
   </head>
 
   <body>
+
+    <% if logged_in? %>
+      <ul>
+        <li><%= link_to "Your Profile", current_user %></li>
+        <li><%= link_to "Edit Your Profile", edit_user_path(current_user) %></li>
+        <li><%= link_to "Logout", logout_path, method: :delete %></li>
+      </ul>
+    <% else %>
+      <%= link_to 'LOG IN', login_path %>
+    <% end %>
+
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
     <%= yield %>
+
+    <h1><%= link_to "New Post", new_post_path %></h1>
+
   </body>
 </html>

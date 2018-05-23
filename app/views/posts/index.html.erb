@@ -1,0 +1,15 @@
+
+</br>
+<% if !logged_in? %>
+  You must be logged in to see the authors of each post.
+<% end %>
+
+<% @posts.each do |post| %>
+  <% if logged_in? %>
+    <h2><strong>Author: <%= User.find(post.user_id).username %></strong><h2>
+  <% else %>
+    <h2>USERNAME REDACTED</h2>
+  <% end %>
+  <h3><strong><%= post.title %></strong></h3>
+  <p><%= post.body %></p>
+<% end %>
