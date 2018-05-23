@@ -83,28 +83,18 @@ RSpec.describe UsersController, type: :controller do
 
       describe 'when new user info is valid' do
         it 'creates the new user, logs in the user, and redirects to user page' do
-          # post :create, params: { user: { username: 'Person10', password: 'password', password_confirmation: 'password' } }
-
           expect{post :create, params: { user: { username: 'Person10', password: 'password', password_confirmation: 'password' } }}.to change{User.count}.by(1)
           expect(logged_in?).to be true
-          # expect(response).to redirect_to(user)
         end
       end
 
       describe 'when new user info is invalid' do
-        # render_views
         it 'does NOT create a new user and the page is re-rendered' do
-          # pass words don't match
           expect{post :create, params: { user: { username: 'Person10', password: 'password', password_confirmation: 'word' } }}.to change{User.count}.by(0)
           expect(logged_in?).to be false
-          # the same page gets re-rendered
-          # expect(response).to render_template(:new)
         end
       end
-
     end
-
-
 
     describe 'GET #edit' do
       it 'redirects user to the login page' do

@@ -9,7 +9,6 @@ RSpec.describe PostsController, type: :controller do
 
   let(:user) { User.find_by(username: 'user1') }
 
-
   context 'when user is logged in' do
 
     before { log_in(User.first) }
@@ -61,7 +60,7 @@ RSpec.describe PostsController, type: :controller do
         expect(response).to redirect_to(login_url)
       end
     end
-    
+
   end
 
 end

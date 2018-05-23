@@ -1,10 +1,6 @@
 class UsersController < ApplicationController
-  # this is a filter to restrict access only to logged in users:
-  # NOTE that we apply ONLY so that this check/filter only occurs on the edit and :edit and :update actions
-  before_action :require_log_in, only: [:edit, :update]
   before_action :require_logged_out, only: [:new, :create]
-
-  # this filter is to give specific access to each user:
+  before_action :require_log_in, only: [:edit, :update]
   before_action :check_correct_user, only: [:edit, :update]
 
   def new
@@ -35,7 +31,6 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      # Handle a successful update
       flash[:success] = 'Profile updated'
       redirect_to @user
     else
@@ -64,8 +59,6 @@ class UsersController < ApplicationController
 
   def check_correct_user
     @user = User.find(params[:id])
-    # redirect_to(root_url) unless @user == current_user
     redirect_to(current_user) unless @user == current_user
-    # redirect_to(current_user) sends a user to their own profile if they tried accessing a different profile
   end
 end

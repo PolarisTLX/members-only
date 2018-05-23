@@ -6,12 +6,11 @@ RSpec.describe 'posts/index.html.erb' do
   before do
     Rails.application.load_seed
   end
-  
+
   context 'when the user is logged in' do
     it 'displays the author name' do
       log_in(User.first)
 
-      # Creates two posts to use for the test view
       assign(:posts, Post.create([{ title: "Something long enough", user_id: 1, body: "Text goes here, I hope." }, { title: "This is a title", body: "Yep, this is some text.", user_id: 1 }]))
 
       render

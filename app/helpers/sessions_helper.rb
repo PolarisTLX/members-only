@@ -1,5 +1,5 @@
 module SessionsHelper
-  # Logs in the user:
+
   def log_in(user)
     session[:user_id] = user.id
   end
@@ -11,30 +11,13 @@ module SessionsHelper
   end
 
   def current_user
-    # if @current_user.nil?
-    #   @current_user = User.find_by(id: session[:user_id])
-    # else
-    #   @current_user
-    # end
+    log_in_from_remember_me_cookie if !session[:user_id] && cookies.signed[:user_id]
+    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+  end
 
-    # shorter way:
-    # @current_user = @current_user || User.find_by(id: session[:user_id])
-
-    # SHORTEST WAY / MOST PROPER using  ||=  ("or equals")
-    # this only assigns once, if if does not yet exist.
-    # (whereas above assigns every time)
-    # @current_user ||= User.find_by(id: session[:user_id])
-
-    # To include the remember me token
-    if session[:user_id]
-      @current_user ||= User.find_by(id: session[:user_id])
-    elsif cookies.signed[:user_id]
-      user = User.find_by(id: cookies.signed[:user_id])
-      if user && user.check_remember_token(cookies[:remember_token])
-        log_in user
-        @current_user = user
-      end
-    end
+  def log_in_from_remember_me_cookie
+    remembered_user = User.find_by(id: cookies.signed[:user_id])
+    log_in(remembered_user) if remembered_user && remembered_user.check_remember_token?(cookies[:remember_token])
   end
 
   def logged_in?

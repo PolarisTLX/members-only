@@ -6,11 +6,9 @@ class User < ApplicationRecord
   validates :password,  presence: true,
                         length: { minimum: 8, maximum: 25 },
                         allow_nil: true
-  # validates :password, presence: true, length: {minimum: 8, maximum: 25 }
   has_secure_password # this takes care of checking the password_confirmation
 
   has_many :posts, dependent: :destroy
-  # dependent: :destroy means that is a user is deleted, so will all the posts they created be deleted
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

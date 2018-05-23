@@ -1,7 +1,5 @@
 class PostsController < ApplicationController
-  # this is a filter to restrict access only to logged in users:
-  # NOTE that we apply ONLY so that this check/filter only occurs on the edit and :edit and :update actions
-  before_action :logged_in_user, only: [:new, :create]
+  before_action :require_log_in, only: [:new, :create]
 
   def new
     @post = Post.new
@@ -13,7 +11,6 @@ class PostsController < ApplicationController
     if @post.save
       flash[:success] = 'Your gossip has been posted'
       redirect_to root_url
-      # root_url will just be where all the posts are shown
     else
       render :new
     end
@@ -29,8 +26,7 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :body)
   end
 
-  # This is the check to allow the authorisation of a user's access
-  def logged_in_user
+  def require_log_in
     unless logged_in?
       flash[:danger] = 'Please log in.'
       redirect_to login_url
