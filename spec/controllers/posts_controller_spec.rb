@@ -2,7 +2,7 @@ require 'rails_helper'
 include SessionsHelper
 
 RSpec.describe PostsController, type: :controller do
-  
+
   before do
     Rails.application.load_seed
   end
@@ -11,9 +11,11 @@ RSpec.describe PostsController, type: :controller do
 
 
   context 'when user is logged in' do
+
+    before { log_in(User.first) }
+
     describe 'GET #new' do
       it 'successfully shows the new post page' do
-        log_in(User.first)
         get :new
         expect(response).to have_http_status(:success)
       end
@@ -22,7 +24,6 @@ RSpec.describe PostsController, type: :controller do
     describe 'POST #create' do
       context 'when new post info is valid' do
         it 'creates the new post' do
-          log_in(User.first)
           expect{post :create, params: { post: { title: 'Major News!', body: 'You wont believe who just said blah blah', user_id: 1} }}.to change{Post.count}.by(1)
           expect(Post.first.title).to eq 'Major News!'
           expect(response).to redirect_to(root_url)
@@ -31,7 +32,6 @@ RSpec.describe PostsController, type: :controller do
 
       context 'when new post info is NOT invalid' do
         it 'does NOT create a new post' do
-          log_in(User.first)
           expect{post :create,
                        params: { post: { title: '',
                                          body: 'You wont believe who just said blah blah',
@@ -43,6 +43,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   context 'when user is not logged in' do
+
     describe 'GET #new' do
       it 'redirects to login page' do
         get :new
@@ -60,5 +61,7 @@ RSpec.describe PostsController, type: :controller do
         expect(response).to redirect_to(login_url)
       end
     end
+    
   end
+
 end
