@@ -2,8 +2,6 @@
 
 # Members Only! - Ruby on Rails application to practice user authentication and authorization
 
-This is for The Odin Project - Rails Course:
-[*Members Only!*](https://www.theodinproject.com/courses/ruby-on-rails/lessons/authentication).
 
 ## Getting started
 
@@ -46,3 +44,9 @@ Then run
 ```
 $ rspec
 ```
+
+
+## Authors
+
+* **Kyle Lemon** - [jklemon17](https://github.com/jklemon17)
+* **Paul Rail** - [PolarisTLX](https://github.com/PolarisTLX)
